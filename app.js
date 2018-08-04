@@ -6,9 +6,9 @@ const morgan = require('morgan');
 
 const userRoutes = require('./app/routes/users');
 
-/*mongoose.connect(`mongodb+srv://mgenteluci:${process.env.ATLAS_PWD}@home-office-cwlyr.mongodb.net/test?retryWrites=true`, { useNewUrlParser: true } )
+mongoose.connect(`mongodb+srv://mgenteluci:${process.env.ATLAS_PWD}@home-office-cwlyr.mongodb.net/test?retryWrites=true`, { useNewUrlParser: true } )
 .then(result => console.log('Connected!'))
-.catch(err => console.log('Could not connect to mongo database!'));*/
+.catch(err => console.log('Could not connect to mongo database!'));
 
 app.set('view engine', 'ejs');
 app.use('/assets', express.static('assets'));

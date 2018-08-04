@@ -9,9 +9,9 @@
         <table>
             <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>Dia</th>
-                    <th>Opções</th>
+                    <th class="thName">Nome</th>
+                    <th class="thDay">Dia</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -20,11 +20,11 @@
                         <td><%= users[i].name %></td>
                         <td><%= users[i].day %></td>
                         <td><a class="remove" href='/users/delete/<%=users[i].id%>'>REMOVER</a></td>
-                    </tr>    
+                    </tr>  
                 <%}%>
             </tbody>
         </table>
-        
+        <h3>Adicionar novo Home Office</h3>
         <form action="/users" method="POST">
             <div>
                 <select name="name" required>
