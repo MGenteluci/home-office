@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
-const userRoutes = require('./app/routes/users');
+const homeOficeRoutes = require('./app/routes/homeOffices');
 
 mongoose.connect(`mongodb+srv://mgenteluci:${process.env.ATLAS_PWD}@home-office-cwlyr.mongodb.net/test?retryWrites=true`, { useNewUrlParser: true } )
 .then(result => console.log('Connected!'))
@@ -30,7 +30,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/users', userRoutes);
+app.use('/homeOffices', homeOficeRoutes);
 
 app.get('/', (req, res, next) => {
     res.format({

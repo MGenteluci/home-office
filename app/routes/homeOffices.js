@@ -2,14 +2,14 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-const User = require('../models/User');
+const HomeOffice = require('../models/HomeOffice');
 
 /**
  * Request to fetch all users
  * @method GET
  */
 router.get('/', (req, res, next) => {
-    User.find()
+    HomeOffice.find()
     .select('name day')
     .exec()
     .then(results => {
@@ -18,7 +18,7 @@ router.get('/', (req, res, next) => {
                 res.status(200).json(results);
             },
             html: () => {
-                res.render('users', { users: results, title: 'Home-Office Schedule' });
+                res.render('homeOffices', { homeOffices: results });
             }
         });
     })
@@ -35,20 +35,20 @@ router.post('/', (req, res, next) => {
     .reverse();
     const dayFormatted = `${dia[0]}/${dia[1]}/${dia[2]}`;
 
-    const user = new User({
+    const homeOffice = new HomeOffice({
         _id: mongoose.Types.ObjectId(),
         name: req.body.name,
         day: dayFormatted
     });
 
-    user.save()
+    homeOffice.save()
     .then(result => {
         res.format({
             json: () =>{
-                res.status(201).json({ message: 'User added' });
+                res.status(201).json({ message: 'Home Office added' });
             },
             html: () => {
-                res.redirect('/users');
+                res.redirect('/homeOffices');
             }
         });
     })
@@ -57,7 +57,7 @@ router.post('/', (req, res, next) => {
             json: () => {
                 res.status(500).json({ error: err });
             },
-            html: () => res.redirect('/users', { errors: 'Campos precisam ser preenchidos '})
+            html: () => res.redirect('/homeOffices', { errors: 'Campos precisam ser preenchidos '})
         });
     });
 });
@@ -69,15 +69,15 @@ router.post('/', (req, res, next) => {
  */
 router.get('/delete/:id', (req, res, next) => {
     const id = req.params.id;
-    User.remove({ _id: id })
+    HomeOffice.remove({ _id: id })
     .exec()
     .then(result => {
         res.format({
             json: () => {
-                res.status(200).json({ message: 'User deleted'});
+                res.status(200).json({ message: 'Home Office deleted'});
             },
             html: () => {
-                res.redirect('/users');
+                res.redirect('/homeOffices');
             }
         });
     })

@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-const userSchema = mongoose.Schema({
+const homeOfficeSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     name: { type: String, required: true },
     day: { type: String, required: true }
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('HomeOffice', homeOfficeSchema);

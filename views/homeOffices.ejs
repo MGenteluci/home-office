@@ -1,8 +1,8 @@
 <html>
     <head>
-        <title><%= title %></title>
+        <title>Home Office Schedule</title>
         <link rel="stylesheet" href="/assets/main.css"/>
-        <link rel="stylesheet" href="/assets/users.css"/>
+        <link rel="stylesheet" href="/assets/homeOffices.css"/>
     </head>
     <body>
     <div id="container">
@@ -15,17 +15,17 @@
                 </tr>
             </thead>
             <tbody>
-                <% for(var i = 0; i < users.length; i++) {%>
+                <% for(var i = 0; i < homeOffices.length; i++) {%>
                     <tr>
-                        <td><%= users[i].name %></td>
-                        <td><%= users[i].day %></td>
-                        <td><a class="remove" href='/users/delete/<%=users[i].id%>'>REMOVER</a></td>
+                        <td><%= homeOffices[i].name %></td>
+                        <td><%= homeOffices[i].day %></td>
+                        <td><a class="remove" href='/homeOffices/delete/<%=homeOffices[i].id%>'>REMOVER</a></td>
                     </tr>  
                 <%}%>
             </tbody>
         </table>
         <h3>Adicionar novo Home Office</h3>
-        <form action="/users" method="POST">
+        <form action="/homeOffices" method="POST">
             <div>
                 <select name="name" required>
                     <option value="">Selecionar Funcionário</option>
