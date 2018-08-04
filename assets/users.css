@@ -1,0 +1,53 @@
+table{
+    width: 100%;
+}
+
+th{
+    height: 50px;
+    font-size: 22px;
+}
+
+table, th, td{
+    border: 2px solid #795548;
+}
+
+th, td{
+    padding: 15px;
+}
+
+form{
+    text-align: center;
+    margin-top: 8px;
+}
+
+input{
+    padding: 12px 20px;
+    border-radius: 4px;
+}
+
+select{
+    padding: 12px 20px;
+    border-radius: 4px;
+    width: 35%;
+    margin-top: 2px;
+}
+
+input[type=date]{
+    width: 35%;
+    margin-top: 2px;
+}
+
+input[type=submit]{
+    background-color: #795548;
+    border: #795548;
+    color: white;
+    width: 20%;
+    font-size: 18px;
+    margin-top: 4px;
+}
+
+.remove{
+    color: red;
+    font-size: 14px;
+
+}

@@ -1,0 +1,19 @@
+body {
+    background-color: #27ae60;
+    font-family: sans-serif;
+}
+
+h1, h2 {
+    text-align: center;
+    color: white;
+}
+
+h1 {
+    font-size: 100px;
+    margin-top: 35vh;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 28px;
+}

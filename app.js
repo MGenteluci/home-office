@@ -6,9 +6,9 @@ const morgan = require('morgan');
 
 const userRoutes = require('./app/routes/users');
 
-mongoose.connect(`mongodb+srv://mgenteluci:${process.env.ATLAS_PWD}@home-office-cwlyr.mongodb.net/test?retryWrites=true`, { useNewUrlParser: true } )
+/*mongoose.connect(`mongodb+srv://mgenteluci:${process.env.ATLAS_PWD}@home-office-cwlyr.mongodb.net/test?retryWrites=true`, { useNewUrlParser: true } )
 .then(result => console.log('Connected!'))
-.catch(err => console.log('Could not connect to mongo database!'));
+.catch(err => console.log('Could not connect to mongo database!'));*/
 
 app.set('view engine', 'ejs');
 app.use('/assets', express.static('assets'));
@@ -31,6 +31,17 @@ app.use((req, res, next) => {
 });
 
 app.use('/users', userRoutes);
+
+app.get('/', (req, res, next) => {
+    res.format({
+        json: () => {
+            res.status(200).json({ message: 'Index page, no json content available here' });
+        },
+        html: () => {
+            res.render('index');
+        }
+    });
+});
 
 app.use((req, res, next) => {
     res.format({
