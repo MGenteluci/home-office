@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel="stylesheet" href="/assets/styles.css"/>
+    </head>
+    <body>
+    <div id="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Dia</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i = 0; i < users.length; i++) {%>
+                    <tr>
+                        <td><%= users[i].name %></td>
+                        <td><%= users[i].day %></td>
+                        <td><a class="remove" href='/users/delete/<%=users[i].id%>'>REMOVER</a></td>
+                    </tr>    
+                <%}%>
+            </tbody>
+        </table>
+        
+        <form action="/users" method="POST">
+            <div>
+                <select name="name" required>
+                    <option value="">Selecionar Funcionário</option>
+                    <option value="Daniel Medina">Daniel Medina</option>
+                    <option value="Luan Almeida">Luan Almeida</option>
+                    <option value="Raphael Mendonça">Raphael Mendonça</option>
+                    <option value="Vitor">Vitor</option>
+                    <option value="Vinicius">Vinicius</option>
+                </select>
+            </div>
+            <div>
+                <input type="date" name="day" required/>
+            </div>
+            <input type="submit" value="Salvar"/>
+        </form>
+    </div>
+    </body>
+</html>
