@@ -1,3 +1,4 @@
+const HomeOfficeController = require('../controllers/homeOffices');
 /**
  * Middleware to check if date received from form is valid
  */
@@ -16,7 +17,7 @@ module.exports = (req, res, next) => {
                     res.status(500).json({ error: 'Date cant be older than today!' });
                 },
                 html: () => {
-                    return console.log('Date can\'t be older than today!');
+                    HomeOfficeController.formError(req, res, next, 'A data não pode ser anterior ao dia de hoje!');
                 }
             });
         }
@@ -27,7 +28,7 @@ module.exports = (req, res, next) => {
                     res.status(500).json({ error: 'You can\'t schedule a Home Office on that date!' });
                 },
                 html: () => {
-                    return console.log('You can\'t schedule a Home Office on that date!');
+                    HomeOfficeController.formError(req, res, next, 'Não é possível agendar um Home Office tão distante!');
                 }
             });
         }
@@ -40,7 +41,7 @@ module.exports = (req, res, next) => {
                     res.status(500).json({ error: 'Invalid year!' });
                 },
                 html: () => {
-                    return console.log('Invalid year!');
+                    HomeOfficeController.formError(req, res, next, 'Ano inválido!');
                 }
             });
     }
