@@ -102,7 +102,14 @@ router.get('/', (req, res, next) => {
     User.find()
     .exec()
     .then(users => {
-        res.status(200).json(users);
+        res.format({
+            json: () => {
+                res.status(200).json(users);
+            },
+            html: () => {
+                res.redirect('/homeOffices');
+            }
+        });
     })
     .catch(err => res.status(500).json({ error: err }));
 });

@@ -7,8 +7,8 @@ module.exports = (req, res, next) => {
     if(dia[0].length === 4){
         
         let data = new Date(dia);
-        let hoje = new Date();
-        console.log();
+        let h = new Date();
+        let hoje = new Date(h.getFullYear(), h.getMonth(), h.getDate());
 
         if(data.getTime() < hoje.getTime()){
             return res.format({
