@@ -18,22 +18,32 @@
                 <% for(var i = 0; i < homeOffices.length; i++) {%>
                     <tr>
                         <td><%= homeOffices[i].name %></td>
-                        <td><%= homeOffices[i].day %></td>
+                        <td>
+                            <%= 
+                            homeOffices[i].day.getDate() + 
+                            "/" + (homeOffices[i].day.getMonth()+1) +
+                            "/" +  homeOffices[i].day.getFullYear()
+                            %>
+                        </td>
                         <td><a class="remove" href='/homeOffices/delete/<%=homeOffices[i].id%>'>REMOVER</a></td>
                     </tr>  
                 <%}%>
             </tbody>
         </table>
         <h3>Adicionar novo Home Office</h3>
+        <ul>
+            <% if(error.length > 0) { %>
+                <li><%= error %></li>
+            <% } %>
+        </ul>
         <form action="/homeOffices" method="POST">
             <div>
                 <select name="name" required>
-                    <option value="">Selecionar Funcionário</option>
-                    <option value="Daniel Medina">Daniel Medina</option>
-                    <option value="Luan Almeida">Luan Almeida</option>
-                    <option value="Raphael Mendonça">Raphael Mendonça</option>
-                    <option value="Vitor">Vitor</option>
-                    <option value="Vinicius">Vinicius</option>
+                    <% for(var i = 0; i < users.length; i++) { %>
+                        <option value="<%= users[i].name %> <%= users[i].surname %>">
+                            <%= users[i].name %> <%= users[i].surname %>
+                        </option>
+                    <% } %>
                 </select>
             </div>
             <div>

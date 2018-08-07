@@ -1,5 +1,6 @@
 {
     "env": {
-        "ATLAS_PWD": "qg966xTwh7FXzoqI"
+        "ATLAS_PWD": "qg966xTwh7FXzoqI",
+        "JWT_KEY": "matheus"
     }
 }

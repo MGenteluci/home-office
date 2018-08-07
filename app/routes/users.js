@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
 
@@ -41,6 +42,41 @@ router.post('/signup', (req, res, next) => {
             });
         }
     });
+
+});
+
+/**
+ * Request to login
+ * @method POST
+ */
+router.post('/signin', (req, res, next) => {
+
+    User.find({ username: req.body.username })
+    .exec()
+    .then(user => {
+        if(user.length < 1){
+            return res.status(401).json({ message: 'Unauthorized access' });
+        }
+
+        bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+            if(err){
+                return res.status(401).json({ message: 'Unauthorized access'});
+            }
+            if(result){
+                const token = jwt.sign({ username: user[0].username, id: user[0]._id }, process.env.JWT_KEY,{
+                    expiresIn: '1h'
+                });
+
+                return res.status(200).json({
+                    message: 'Authentication succeeded',
+                    token: token
+                });
+            }
+            res.status(401).json({ message: 'Unauthorized access' });
+        });
+
+    })
+    .catch(err => res.status(500).json({ message: 'Unauthorized access' }));
 
 });
 

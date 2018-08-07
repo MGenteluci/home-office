@@ -1,15 +1,13 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const db = require('./app/conf/database');
 
 const homeOficeRoutes = require('./app/routes/homeOffices');
 const userRoutes = require('./app/routes/users');
 
-mongoose.connect(`mongodb+srv://mgenteluci:${process.env.ATLAS_PWD}@home-office-cwlyr.mongodb.net/test?retryWrites=true`, { useNewUrlParser: true } )
-.then(result => console.log('Connected!'))
-.catch(err => console.log('Could not connect to mongo database!'));
+db.conn;
 
 app.set('view engine', 'ejs');
 app.use('/assets', express.static('assets'));

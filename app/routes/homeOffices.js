@@ -1,16 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const checkAuth = require('../middlewares/check-auth');
+const checkDate = require('../middlewares/check-date');
 
 const HomeOffice = require('../models/HomeOffice');
+const User = require('../models/User');
 
 /**
- * Request to fetch all users
+ * Request to fetch all Home Offices
  * @method GET
  */
 router.get('/', (req, res, next) => {
     HomeOffice.find()
     .select('name day')
+    .sort({day: 'asc'})
     .exec()
     .then(results => {
         res.format({
@@ -18,7 +22,15 @@ router.get('/', (req, res, next) => {
                 res.status(200).json(results);
             },
             html: () => {
-                res.render('homeOffices', { homeOffices: results });
+                User.find()
+                .sort({name: 'asc'})
+                .exec()
+                .then(users => res.render('homeOffices', {
+                    homeOffices: results,
+                    error: '',
+                    users: users
+                }))
+                .catch(err => res.status(500).json(err))
             }
         });
     })
@@ -26,19 +38,17 @@ router.get('/', (req, res, next) => {
 });
 
 /**
- * Request to add a new user
+ * Request to add a new Home Office
  * @method POST
  */
-router.post('/', (req, res, next) => {
-    let dia = req.body.day
-    .split('-')
-    .reverse();
-    const dayFormatted = `${dia[0]}/${dia[1]}/${dia[2]}`;
+router.post('/', checkDate, (req, res, next) => {
+    let dia = req.body.day.split('-');
+    dia = new Date(dia);
 
     const homeOffice = new HomeOffice({
         _id: mongoose.Types.ObjectId(),
         name: req.body.name,
-        day: dayFormatted
+        day: dia
     });
 
     homeOffice.save()
@@ -63,7 +73,7 @@ router.post('/', (req, res, next) => {
 });
 
 /**
- * Request to remove an user from html FORM
+ * Request to remove a Home Office from html FORM
  * IT'S NOT RECOMMENDED TO REMOVE ANY DATA USING GET METHOD
  * @method GET
  */
