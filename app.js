@@ -2,15 +2,12 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const db = require('./app/conf/database');
+const db = require('./api/conf/database');
 
-const homeOficeRoutes = require('./app/routes/homeOffices');
-const userRoutes = require('./app/routes/users');
+const homeOficeRoutes = require('./api/routes/homeOffices');
+const userRoutes = require('./api/routes/users');
 
 db.conn;
-
-app.set('view engine', 'ejs');
-app.use('/assets', express.static('assets'));
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));

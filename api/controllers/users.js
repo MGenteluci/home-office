@@ -1,17 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
 const User = require('../models/User');
 
-/**
- * Request to create a new user
- * bcrypt used to hash the password
- * @method POST
- */
-router.post('/signup', (req, res, next) => {
+exports.signUp = (req, res, next) => {
     
     User.find({ username: req.body.username })
     .exec()
@@ -43,13 +34,9 @@ router.post('/signup', (req, res, next) => {
         }
     });
 
-});
+};
 
-/**
- * Request to login
- * @method POST
- */
-router.post('/signin', (req, res, next) => {
+exports.signIn = (req, res, next) => {
 
     User.find({ username: req.body.username })
     .exec()
@@ -78,28 +65,20 @@ router.post('/signin', (req, res, next) => {
     })
     .catch(err => res.status(500).json({ message: 'Unauthorized access' }));
 
-});
+};
 
-/**
- * Request to delete an User
- * @method DELETE
- * @param id
- */
-router.delete('/:id', (req, res, next) => {
+exports.removeUser = (req, res, next) => {
     
     User.remove({ _id: req.params.id })
     .exec()
     .then(result => res.status(200).json({ message: 'User deleted' }))
     .catch(err => res.status(500).json({ error: err }));
 
-});
+};
 
-/**
- * Request to fetch all users
- * @method GET
- */
-router.get('/', (req, res, next) => {
+exports.getAllUsers = (req, res, next) => {
     User.find()
+    .sort({name: 'asc'})
     .exec()
     .then(users => {
         res.format({
@@ -112,6 +91,4 @@ router.get('/', (req, res, next) => {
         });
     })
     .catch(err => res.status(500).json({ error: err }));
-});
-
-module.exports = router;
+};
