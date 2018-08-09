@@ -5,6 +5,6 @@ Node.js API to Schedule Home Office
 Express  
 Body-Parser  
 Mongoose  
-Morgan
-JsonWebToken
+Morgan  
+JsonWebToken  
 BCrypt  

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const userExists = require('../middlewares/userExists');
 
 const UserController = require('../controllers/users');
 
@@ -9,7 +10,7 @@ const UserController = require('../controllers/users');
  * Path: /users/signup
  * @method POST
  */
-router.post('/signup', UserController.signUp);
+router.post('/signup', userExists, UserController.signUp);
 
 /**
  * Request to login
