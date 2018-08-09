@@ -4,6 +4,7 @@ Node.js API to Schedule Home Office
 # Dependencies
 Express  
 Body-Parser  
-EJS  
 Mongoose  
-Morgan  
+Morgan
+JsonWebToken
+BCrypt  
