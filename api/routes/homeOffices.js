@@ -25,6 +25,6 @@ router.post('/', checkDate, HomeOfficeController.addHomeOffice);
  * @method DELETE
  * @param id
  */
-router.delete('/:id', HomeOfficeController.removeHomeOffice);
+router.delete('/:id', checkAuth, HomeOfficeController.removeHomeOffice);
 
 module.exports = router;

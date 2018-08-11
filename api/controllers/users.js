@@ -3,6 +3,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
+/**
+ * Method to create a new user
+ */
 exports.signUp = (req, res, next) => {
     
     User.find({ username: req.body.username })
@@ -37,6 +40,9 @@ exports.signUp = (req, res, next) => {
 
 };
 
+/**
+ * Method to login
+ */
 exports.signIn = (req, res, next) => {
 
     User.find({ username: req.body.username })

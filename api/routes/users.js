@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userExists = require('../middlewares/userExists');
+const checkAuth = require('../middlewares/check-auth');
 
 const UserController = require('../controllers/users');
 
@@ -25,7 +26,7 @@ router.post('/signin', UserController.signIn);
  * @method DELETE
  * @param id
  */
-router.delete('/:id', UserController.removeUser);
+router.delete('/:id', checkAuth, UserController.removeUser);
 
 /**
  * Request to fetch all users
