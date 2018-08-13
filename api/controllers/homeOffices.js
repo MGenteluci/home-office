@@ -20,14 +20,11 @@ exports.removeHomeOffice = (req, res, next) => {
 };
 
 exports.addHomeOffice = (req, res, next) => {
-    let dia = req.body.day.split('-');
-    dia = new Date(dia);
-
     const homeOffice = new HomeOffice({
         _id: new mongoose.Types.ObjectId(),
         user: req.body.userId,
         name: req.body.name,
-        day: dia
+        day: new Date(req.body.day)
     });
 
     homeOffice.save()
