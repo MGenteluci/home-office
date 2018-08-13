@@ -27,4 +27,12 @@ router.post('/', checkDate, HomeOfficeController.addHomeOffice);
  */
 router.delete('/:id', checkAuth, HomeOfficeController.removeHomeOffice);
 
+/**
+ * Request to update the Home Office's day
+ * Path: /homeOffices/id
+ * @method PATCH
+ * @param id
+ */
+router.patch('/:id', checkDate, HomeOfficeController.updateHomeOfficeDay);
+
 module.exports = router;

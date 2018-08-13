@@ -34,3 +34,10 @@ exports.addHomeOffice = (req, res, next) => {
     .then(result => res.status(201).json({ message: 'Home Office added' }))
     .catch(err => res.status(500).json({ error: err }));
 };
+
+exports.updateHomeOfficeDay = (req, res, next) => {
+    HomeOffice.update({ _id: req.params.id }, { $set: { day: req.body.day } })
+    .exec()
+    .then(result => res.status(202).json({ message: 'Home Office updated' }))
+    .catch(err => res.status(500).json({ error: err }));
+};
