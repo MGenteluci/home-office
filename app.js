@@ -4,8 +4,9 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const db = require('./api/conf/database');
 
-const homeOficeRoutes = require('./api/routes/homeOffices');
+const teamRoutes = require('./api/routes/teams');
 const userRoutes = require('./api/routes/users');
+const homeOficeRoutes = require('./api/routes/homeOffices');
 
 db.conn;
 
@@ -26,8 +27,9 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/homeOffices', homeOficeRoutes);
+app.use('/teams', teamRoutes);
 app.use('/users', userRoutes);
+app.use('/homeOffices', homeOficeRoutes);
 
 app.get('/', (req, res, next) => {
     res.format({

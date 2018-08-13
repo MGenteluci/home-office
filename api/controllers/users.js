@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
@@ -8,36 +8,28 @@ const User = require('../models/User');
  */
 exports.signUp = (req, res, next) => {
     
-    User.find({ username: req.body.username })
-    .exec()
-    .then(user => {
-        if(user.length >= 1){
-            return res.status(409).json({ message: 'Username already in use! '});
+    bcrypt.hash(req.body.password, 10, (err, hash) => {
+        if(err){
+            return res.status(500).json({ error: err });
         }else{
-            bcrypt.hash(req.body.password, 10, (err, hash) => {
-                if(err){
-                    return res.status(500).json({ error: err });
-                }else{
-                    const user = new User({
-                        _id: new mongoose.Types.ObjectId(),
-                        name: req.body.name,
-                        surname: req.body.surname,
-                        username: req.body.username,
-                        password: hash
-                    });
-        
-                    user.save()
-                    .then(result => {
-                        res.status(201).json({ message: 'User created!' , user: result });
-                    })
-                    .catch(err => {
-                        res.status(500).json({ error: err })
-                    });
-                }
+            const user = new User({
+                _id: new mongoose.Types.ObjectId(),
+                name: req.body.name,
+                surname: req.body.surname,
+                username: req.body.username,
+                password: hash,
+                team: req.body.team
+            });
+
+            user.save()
+            .then(result => {
+                res.status(201).json({ message: 'User created!' , user: result });
+            })
+            .catch(err => {
+                res.status(500).json({ error: err })
             });
         }
     });
-
 };
 
 /**
@@ -86,17 +78,9 @@ exports.removeUser = (req, res, next) => {
 
 exports.getAllUsers = (req, res, next) => {
     User.find()
+    .populate('team')
     .sort({name: 'asc'})
     .exec()
-    .then(users => {
-        res.format({
-            json: () => {
-                res.status(200).json(users);
-            },
-            html: () => {
-                res.redirect('/homeOffices');
-            }
-        });
-    })
+    .then(users => res.status(200).json(users))
     .catch(err => res.status(500).json({ error: err }));
 };

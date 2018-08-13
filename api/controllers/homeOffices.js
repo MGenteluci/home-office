@@ -4,7 +4,7 @@ const HomeOffice = require('../models/HomeOffice');
 exports.getAllHomeOffices = (req, res, next) => {
     HomeOffice.find()
     .select('_id day')
-    .populate('user')
+    .populate({ path: 'user', populate: { path: 'team' }})
     .sort({day: 'asc'})
     .exec()
     .then(homeOffices => res.status(200).json(homeOffices))
