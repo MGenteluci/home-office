@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const HomeOffice = require('../models/HomeOffice');
-const moment = require('moment');
-moment.locale('pt-br')
 
 exports.getAllHomeOffices = (req, res, next) => {
     HomeOffice.find()

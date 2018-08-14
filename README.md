@@ -6,5 +6,5 @@ Express
 Body-Parser  
 Mongoose  
 Morgan  
-JsonWebToken  
+JWT  
 BCrypt  
