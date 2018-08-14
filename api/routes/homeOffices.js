@@ -35,4 +35,11 @@ router.delete('/:id', checkAuth, HomeOfficeController.removeHomeOffice);
  */
 router.patch('/:id', checkDate, HomeOfficeController.updateHomeOfficeDay);
 
+/**
+ * Request to fetch the Home Offices where the date is equal or higher than today
+ * Path: /homeOffices/current
+ * @method GET
+ */
+router.get('/current', HomeOfficeController.getAllHomeOfficesFromTodayAndBeyond);
+
 module.exports = router;
