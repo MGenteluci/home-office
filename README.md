@@ -1,7 +1,7 @@
-# home-office
-Node.js API to Schedule Home Office  
+# Home Office
+> Node.js API to Schedule Home Office  
 
-# Dependencies
+## Dependencies
 Express  
 Body-Parser  
 Mongoose  
