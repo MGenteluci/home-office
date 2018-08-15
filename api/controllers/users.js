@@ -84,3 +84,12 @@ exports.getAllUsers = (req, res, next) => {
     .then(users => res.status(200).json(users))
     .catch(err => res.status(500).json({ error: err }));
 };
+
+exports.updateUsersTeam = (req, res, next) => {
+
+    User.update({ _id: req.body.userId }, { $set: { team: req.body.teamId }})
+    .exec()
+    .then(result => res.status(202).json({ message: 'Team added' }))
+    .catch(err => res.status(500).json({ error: err }));
+
+};

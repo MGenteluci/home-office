@@ -35,4 +35,11 @@ router.delete('/:id', checkAuth, UserController.removeUser);
  */
 router.get('/', UserController.getAllUsers);
 
+/**
+ * Endpoint to add or change team in user
+ * Path: /updateTeam
+ * @method PATCH
+ */
+router.patch('/updateTeam', UserController.updateUsersTeam);
+
 module.exports = router;
