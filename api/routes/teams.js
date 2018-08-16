@@ -18,4 +18,11 @@ router.post('/', isTeamNameUsed, TeamController.addTeam);
  */
 router.get('/', TeamController.getAllTeams);
 
+/**
+ * Endpoint to update the Team's Chat URL
+ * Path: /teams/updateTeamChatUrl
+ * @method PATCH
+ */
+router.patch('/updateTeamChatUrl', TeamController.updateTeamChatUrl);
+
 module.exports = router;

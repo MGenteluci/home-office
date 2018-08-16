@@ -22,3 +22,12 @@ exports.getAllTeams = (req, res, next) => {
     .then(teams => res.status(200).json(teams))
     .catch(err => res.status(500).json({ error: err }));
 };
+
+exports.updateTeamChatUrl = (req, res, next) => {
+
+    Team.update({ _id : req.body.id }, { $set: { teamChatUrl: req.body.teamChatUrl } })
+    .exec()
+    .then(result => res.status(202).json({ message: 'Chat\'s URL Updated' }))
+    .catch(err => res.status(500).json({ error: err }));
+
+};
