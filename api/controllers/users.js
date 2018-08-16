@@ -38,6 +38,7 @@ exports.signUp = (req, res, next) => {
 exports.signIn = (req, res, next) => {
 
     User.find({ username: req.body.username })
+    .populate('team')
     .exec()
     .then(user => {
         if(user.length < 1){
