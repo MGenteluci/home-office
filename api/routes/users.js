@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userExists = require('../middlewares/userExists');
 const checkAuth = require('../middlewares/check-auth');
+const checkPassword = require('../middlewares/checkPassword');
 
 const UserController = require('../controllers/users');
 
@@ -37,9 +38,16 @@ router.get('/', UserController.getAllUsers);
 
 /**
  * Endpoint to add or change team in user
- * Path: /updateTeam
+ * Path: /users/updateTeam
  * @method PATCH
  */
 router.patch('/updateTeam', UserController.updateUsersTeam);
+
+/**
+ * Endpoint to change user's password
+ * Path: /users/changePassword
+ * @method PATCH
+ */
+router.patch('/changePassword', checkPassword, UserController.changePassword);
 
 module.exports = router;
