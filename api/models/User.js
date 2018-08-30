@@ -7,7 +7,8 @@ const userSchema = mongoose.Schema({
     surname: {type: String, required: true },
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    team: { type: mongoose.Schema.Types.ObjectId, ref: 'Team', required: true }
+    team: { type: mongoose.Schema.Types.ObjectId, ref: 'Team', required: true },
+    role: { type: mongoose.Schema.Types.ObjectId, ref: 'Role' }
 
 });
 

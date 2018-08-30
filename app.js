@@ -7,6 +7,7 @@ const db = require('./api/conf/database');
 const teamRoutes = require('./api/routes/teams');
 const userRoutes = require('./api/routes/users');
 const homeOficeRoutes = require('./api/routes/homeOffices');
+const roleRoutes = require('./api/routes/roles');
 
 db.conn;
 
@@ -30,27 +31,10 @@ app.use((req, res, next) => {
 app.use('/teams', teamRoutes);
 app.use('/users', userRoutes);
 app.use('/homeOffices', homeOficeRoutes);
+app.use('/roles', roleRoutes);
 
-app.get('/', (req, res, next) => {
-    res.format({
-        json: () => {
-            res.status(200).json({ message: 'Index page, no json content available here' });
-        },
-        html: () => {
-            res.render('index');
-        }
-    });
-});
+app.get('/', (req, res, next) => res.status(204).json());
 
-app.use((req, res, next) => {
-    res.format({
-        json: () => {
-            res.status(404).json({ message: 'Not found' });
-        },
-        html: () => {
-            res.render('404');
-        }
-    });
-});
+app.use((req, res, next) => res.status(404).json({ message: 'Not found' }));
 
 module.exports = app;

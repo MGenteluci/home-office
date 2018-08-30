@@ -18,7 +18,8 @@ exports.signUp = (req, res, next) => {
                 surname: req.body.surname,
                 username: req.body.username,
                 password: hash,
-                team: req.body.team
+                team: req.body.team,
+                role: req.body.role
             });
 
             user.save()
@@ -38,7 +39,7 @@ exports.signUp = (req, res, next) => {
 exports.signIn = (req, res, next) => {
 
     User.find({ username: req.body.username })
-    .populate('team')
+    .populate('team role')
     .exec()
     .then(user => {
         if(user.length < 1){
