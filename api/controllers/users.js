@@ -80,7 +80,7 @@ exports.removeUser = (req, res, next) => {
 
 exports.getAllUsers = (req, res, next) => {
     User.find()
-    .populate('team')
+    .populate('team role')
     .sort({name: 'asc'})
     .exec()
     .then(users => res.status(200).json(users))
@@ -110,4 +110,12 @@ exports.changePassword = (req, res, next) => {
             return res.status(401).json({ message: 'Unauthorized access' });
         }
     });
+};
+
+exports.updateUserRole = (req, res, next) => {
+
+    User.update({ _id: req.body.userId }, { $set: { role: req.body.role } })
+    .exec()
+    .then(result => res.status(202).json({ message: `User's role updated` }))
+    .catch(err => res.status(500).json(err));
 };

@@ -11,7 +11,9 @@ const roleRoutes = require('./api/routes/roles');
 
 db.conn;
 
-app.use(morgan('dev'));
+if(process.env.NODE_ENV !== 'test')
+    app.use(morgan('dev'));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

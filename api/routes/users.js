@@ -50,4 +50,11 @@ router.patch('/updateTeam', UserController.updateUsersTeam);
  */
 router.patch('/changePassword', checkPassword, UserController.changePassword);
 
+/**
+ * Endpoint to change user's role
+ * Path: /users/updateUserRole
+ * @method PATCH
+ */
+router.patch('/updateUserRole', UserController.updateUserRole);
+
 module.exports = router;
