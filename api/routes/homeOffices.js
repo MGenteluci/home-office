@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
+
 const checkAuth = require('../middlewares/check-auth');
 const checkDate = require('../middlewares/check-date');
+
+const mailer = require('../helpers/sendMail');
 
 const HomeOfficeController = require('../controllers/homeOffices');
 
@@ -17,7 +20,7 @@ router.get('/', HomeOfficeController.getAllHomeOffices);
  * Path: /homeOffices
  * @method POST
  */
-router.post('/', checkDate, HomeOfficeController.addHomeOffice);
+router.post('/', checkDate, HomeOfficeController.addHomeOffice, mailer.sendMail);
 
 /**
  * Request to remove a Home Office

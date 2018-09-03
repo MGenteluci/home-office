@@ -6,7 +6,8 @@ exports.addTeam = (req, res, next) => {
     let team = new Team({
         _id: mongoose.Types.ObjectId(),
         name: req.body.name,
-        teamChatUrl: req.body.teamChatUrl
+        teamChatUrl: req.body.teamChatUrl,
+        email: req.body.email
     })
 
     team.save()
