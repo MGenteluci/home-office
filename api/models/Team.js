@@ -4,7 +4,8 @@ const teamSchema = mongoose.Schema({
 
     _id: { type: mongoose.Schema.Types.ObjectId },
     name: { type: String, required: true, unique: true },
-    teamChatUrl: { type: String }
+    teamChatUrl: { type: String },
+    email: { type: String }
 
 });
 

@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
+
 const HomeOffice = require('../models/HomeOffice');
+const User = require('../models/User');
 
 exports.getAllHomeOffices = (req, res, next) => {
     HomeOffice.find()
@@ -41,7 +43,20 @@ exports.addHomeOffice = (req, res, next) => {
     });
 
     homeOffice.save()
-    .then(result => res.status(201).json({ message: 'Home Office added' }))
+    .then(result => {
+        
+        User.findOne({ _id: result.user })
+        .populate('team')
+        .exec()
+        .then(user => {
+            req.mailTo = user.team.email;
+            req.userFullName = `${user.name} ${user.surname}`;
+            req.day = result.day;
+            next();
+        })
+        .catch(err => res.status(500).json(err));
+
+    })
     .catch(err => res.status(500).json({ error: err }));
 };
 

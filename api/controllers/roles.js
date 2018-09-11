@@ -13,3 +13,12 @@ exports.create = (req, res, next) => {
     .catch(err => res.status(500).json(err));
 
 };
+
+exports.findAll = (req, res, next) => {
+
+    Role.find()
+    .exec()
+    .then(roles => res.status(200).json(roles))
+    .catch(err => res.status(500).json(err));
+
+};
