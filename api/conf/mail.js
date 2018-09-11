@@ -3,12 +3,15 @@ const nodemailer = require('nodemailer');
 exports.send = (mailTo, name, day) => {
     
     const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
+        host: 'smtp-mail.outlook.com',
         port: 587,
         secure: false,
         auth: {
-            user: 'mail@gmail.com',
-            pass: 'password'
+            user: process.env.MAIL_USER,
+            pass: process.env.MAIL_PASSWORD
+        },
+        tls: {
+            ciphers: 'SSLv3'
         }
     });
     
