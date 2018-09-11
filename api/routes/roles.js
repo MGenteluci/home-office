@@ -9,4 +9,10 @@ const RoleController = require('../controllers/roles');
  */
 router.post('/', RoleController.create);
 
+/**
+ * Endpoint to find all roles
+ * @method GET
+ */
+router.get('/', RoleController.findAll);
+
 module.exports = router;

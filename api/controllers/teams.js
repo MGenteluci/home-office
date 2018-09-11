@@ -33,3 +33,12 @@ exports.updateTeamChatUrl = (req, res, next) => {
     .catch(err => res.status(500).json({ error: err }));
 
 };
+
+exports.updateEmail = (req, res, next) => {
+
+    Team.update({ _id : req.body.id }, { $set: { email: req.body.email } })
+    .exec()
+    .then(result => res.status(202).json({ message: 'Email updated' }))
+    .catch(err => res.status(500).json({ error: err }));
+
+};

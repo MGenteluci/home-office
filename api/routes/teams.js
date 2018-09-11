@@ -25,4 +25,11 @@ router.get('/', TeamController.getAllTeams);
  */
 router.patch('/updateTeamChatUrl', TeamController.updateTeamChatUrl);
 
+/**
+ * Endpoint to update the Team's email
+ * Path: /teams/updateEmail
+ * @method PATCH
+ */
+router.patch('/updateEmail', TeamController.updateEmail);
+
 module.exports = router;
