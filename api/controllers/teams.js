@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Team = require('../models/Team');
 
-exports.addTeam = (req, res, next) => {
+exports.create = (req, res, next) => {
 
     let team = new Team({
         _id: mongoose.Types.ObjectId(),
@@ -17,7 +17,7 @@ exports.addTeam = (req, res, next) => {
     .catch(err => res.status(500).json({ error: err }));
 };
 
-exports.getAllTeams = (req, res, next) => {
+exports.findAll = (req, res, next) => {
 
     Team.find()
     .exec()
@@ -25,20 +25,14 @@ exports.getAllTeams = (req, res, next) => {
     .catch(err => res.status(500).json({ error: err }));
 };
 
-exports.updateTeamChatUrl = (req, res, next) => {
+exports.update = (req, res, next) => {
 
-    Team.update({ _id : req.body.id }, { $set: { teamChatUrl: req.body.teamChatUrl } })
-    .exec()
-    .then(result => res.status(202).json({ message: 'Chat\'s URL Updated' }))
-    .catch(err => res.status(500).json({ error: err }));
+    const toUpdate = {};
 
-};
+    for(const ops of req.body)
+        toUpdate[ops.key] = ops.value; 
 
-exports.updateEmail = (req, res, next) => {
-
-    Team.update({ _id : req.body.id }, { $set: { email: req.body.email } })
-    .exec()
-    .then(result => res.status(202).json({ message: 'Email updated' }))
-    .catch(err => res.status(500).json({ error: err }));
-
+    Team.update({ _id: req.params.id }, { $set: toUpdate })
+    .then(result => res.status(202).json({ message: 'Updated' }))
+    .catch(err => res.status(500).json(err));
 };
