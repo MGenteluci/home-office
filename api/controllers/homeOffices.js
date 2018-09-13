@@ -49,6 +49,7 @@ exports.addHomeOffice = (req, res, next) => {
         .populate('team')
         .exec()
         .then(user => {
+            req.team = user.team.name;
             req.mailTo = user.team.email;
             req.userFullName = `${user.name} ${user.surname}`;
             req.day = result.day;

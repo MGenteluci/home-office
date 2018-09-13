@@ -5,31 +5,22 @@ const isTeamNameUsed = require('../middlewares/isTeamNameUsed');
 const TeamController = require('../controllers/teams');
 
 /**
- * Request to add a new Team
- * Path: /homeOffices
+ * Endpoint to create a new Team
  * @method POST
  */
-router.post('/', isTeamNameUsed, TeamController.addTeam);
+router.post('/', isTeamNameUsed, TeamController.create);
 
 /**
- * Request to fetch all Teams
- * Path: /teams
+ * Endpoint to find all Teams
  * @method GET
  */
-router.get('/', TeamController.getAllTeams);
+router.get('/', TeamController.findAll);
 
 /**
- * Endpoint to update the Team's Chat URL
- * Path: /teams/updateTeamChatUrl
+ * Endpoint to update a Team
  * @method PATCH
+ * @param id
  */
-router.patch('/updateTeamChatUrl', TeamController.updateTeamChatUrl);
-
-/**
- * Endpoint to update the Team's email
- * Path: /teams/updateEmail
- * @method PATCH
- */
-router.patch('/updateEmail', TeamController.updateEmail);
+router.patch('/:id', TeamController.update);
 
 module.exports = router;

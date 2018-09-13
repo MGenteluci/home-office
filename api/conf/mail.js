@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-exports.send = (mailTo, name, day) => {
+exports.send = (mailTo, name, day, team) => {
     
     const transporter = nodemailer.createTransport({
         host: 'smtp-mail.outlook.com',
@@ -16,9 +16,10 @@ exports.send = (mailTo, name, day) => {
     });
     
     const mailOptions = {
+        from: `"Home Office" <${process.env.MAIL_USER}>`,
         to: mailTo,
         subject: 'Novo Home Office Agendado!',
-        html: `<h1>${name} - ${day}</h1>`
+        html: `<h1>Time: ${team}</h1><h1>${name} - ${day}</h1>`
     };
     
     transporter.sendMail(mailOptions, (error, info) => {
