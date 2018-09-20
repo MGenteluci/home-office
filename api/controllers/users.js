@@ -6,7 +6,7 @@ const User = require('../models/User');
 /**
  * Method to create a new user
  */
-exports.signUp = (req, res, next) => {
+exports.create = (req, res, next) => {
     
     bcrypt.hash(req.body.password, 10, (err, hash) => {
         if(err){
@@ -33,9 +33,36 @@ exports.signUp = (req, res, next) => {
     });
 };
 
-/**
- * Method to login
- */
+exports.findAll = (req, res, next) => {
+    User.find()
+    .populate('team role')
+    .sort({name: 'asc'})
+    .exec()
+    .then(users => res.status(200).json(users))
+    .catch(err => res.status(500).json({ error: err }));
+};
+
+exports.update = (req, res, next) => {
+
+    let updateOps = {};
+
+    for(const ops of req.body)
+        updateOps[ops.key] = ops.value;
+
+    User.update({ _id: req.params.id }, { $set: updateOps })
+    .then(result => res.status(202).json({ message: 'User updated' }))
+    .catch(err => res.status(500).json(err));
+};
+
+exports.remove = (req, res, next) => {
+    
+    User.remove({ _id: req.params.id })
+    .exec()
+    .then(result => res.status(200).json({ message: 'User deleted' }))
+    .catch(err => res.status(500).json({ error: err }));
+
+};
+
 exports.signIn = (req, res, next) => {
 
     User.find({ username: req.body.username })
@@ -69,33 +96,6 @@ exports.signIn = (req, res, next) => {
 
 };
 
-exports.removeUser = (req, res, next) => {
-    
-    User.remove({ _id: req.params.id })
-    .exec()
-    .then(result => res.status(200).json({ message: 'User deleted' }))
-    .catch(err => res.status(500).json({ error: err }));
-
-};
-
-exports.getAllUsers = (req, res, next) => {
-    User.find()
-    .populate('team role')
-    .sort({name: 'asc'})
-    .exec()
-    .then(users => res.status(200).json(users))
-    .catch(err => res.status(500).json({ error: err }));
-};
-
-exports.updateUsersTeam = (req, res, next) => {
-
-    User.update({ _id: req.body.userId }, { $set: { team: req.body.teamId }})
-    .exec()
-    .then(result => res.status(202).json({ message: 'Team added' }))
-    .catch(err => res.status(500).json({ error: err }));
-
-};
-
 exports.changePassword = (req, res, next) => {
 
     bcrypt.hash(req.body.newPassword, 10, (err, hash) => {
@@ -110,12 +110,4 @@ exports.changePassword = (req, res, next) => {
             return res.status(401).json({ message: 'Unauthorized access' });
         }
     });
-};
-
-exports.updateUserRole = (req, res, next) => {
-
-    User.update({ _id: req.body.userId }, { $set: { role: req.body.role } })
-    .exec()
-    .then(result => res.status(202).json({ message: `User's role updated` }))
-    .catch(err => res.status(500).json(err));
 };

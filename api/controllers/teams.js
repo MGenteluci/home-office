@@ -27,12 +27,12 @@ exports.findAll = (req, res, next) => {
 
 exports.update = (req, res, next) => {
 
-    const toUpdate = {};
+    const updateOps = {};
 
     for(const ops of req.body)
-        toUpdate[ops.key] = ops.value; 
+        updateOps[ops.key] = ops.value; 
 
-    Team.update({ _id: req.params.id }, { $set: toUpdate })
+    Team.update({ _id: req.params.id }, { $set: updateOps })
     .then(result => res.status(202).json({ message: 'Updated' }))
     .catch(err => res.status(500).json(err));
 };
