@@ -101,7 +101,7 @@ exports.changePassword = (req, res, next) => {
     bcrypt.hash(req.body.newPassword, 10, (err, hash) => {
         if(hash){
 
-            User.update({ _id: req.body.userId }, { $set: { password: hash } })
+            User.update({ _id: req.params.userId }, { $set: { password: hash } })
             .exec()
             .then(result => res.status(202).json({ message: 'Password changed' }))
             .catch(err => res.status(401).json({ message: 'Unauthorized access' }));
