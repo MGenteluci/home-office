@@ -43,6 +43,6 @@ router.post('/signin', UserController.signIn);
  * Endpoint to change user's password
  * @method PATCH
  */
-router.patch('/password/:id', checkPassword, UserController.changePassword);
+router.patch('/password/:userId', checkPassword, UserController.changePassword);
 
 module.exports = router;
