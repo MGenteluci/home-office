@@ -2,10 +2,10 @@
   "name": "home-office",
   "version": "1.0.0",
   "description": "An application to organize the home-office schelude",
-  "main": "index.js",
+  "main": "bin/www",
   "scripts": {
     "test": "mocha api/test/roles --timeout 10000",
-    "start": "nodemon server.js"
+    "start": "nodemon ./bin/www"
   },
   "author": "Matheus Genteluci de Almeida",
   "license": "ISC",

@@ -3,7 +3,7 @@ const User = require('../models/User');
 
 module.exports = (req, res, next) => {
 
-    let userId = req.body.userId;
+    let userId = req.params.userId;
     let pwd = req.body.password;
 
     User.findById(userId)
