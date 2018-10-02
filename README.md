@@ -1,5 +1,9 @@
+# :x: Deprecated
+
+* Este projeto foi movido para um repositório privado e por isso não será mais atualizado.
+* Última atualização: Setembro 19, 2018.
+
 # Dialga
-![Dialga](https://pbs.twimg.com/profile_images/2233477062/image_400x400.jpg)  
 Dialga (ディアルガ Diaruga) é um pokémon lendário tipo Metal/Dragão, criado por Arceus para o ajudar a construir o mundo. Ele tem um diamante em seu tórax, que lhe permite controlar o tempo.
 
 ## Finalidade do Projeto
